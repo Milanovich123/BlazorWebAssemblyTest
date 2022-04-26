@@ -1,0 +1,291 @@
+﻿@page "/viewer/{projectId}"
+@using BlazorProject.Shared;
+@using BlazorProject.Shared.ResponseClasses;
+@using System.Security.Cryptography;
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@inject BimsyncService bim;
+@inject IHttpClientFactory _clientFactory
+
+<h1>Viewer</h1>
+
+<div>
+    @if (currentSelectedObject != null)
+    {
+        <span>@currentSelectedObject.Attributes.Name.Value - @currentSelectedObject.IfcType</span>
+    }
+    else
+    {
+        <span>ObjectInformation</span>
+    }
+</div>
+
+@if (viewerResponse != null)
+{
+
+    @if (!loaded)
+    {
+        <div class="btn-group" role="group">
+            <button class="btn btn-primary" @onclick="load">Load all objects from project</button>
+            @*<button class="btn btn-primary" @onclick="entity">Information</button>*@
+        </div>
+    }
+    else
+    {
+        <button title="Show all" class="btn btn-secondary" @onclick="showAll">Show all</button>
+        <button title="Hide all" class="btn btn-secondary" @onclick="hideAll">Hide all</button>
+        <div class="btn-group" role="group">
+            <button title="Show selected" class="buttoneye" @onclick="makeOpaque"></button>
+            <button title="Translucent selected" class="buttoneye" id="eye2" @onclick="makeTranslucent"></button>
+            <button title="Hide selected" class="buttoneye" id="eye3" @onclick="hideSelected"></button>
+        </div>
+    }
+
+
+    <div id="viewer-container">
+
+    </div>
+}
+else
+{
+    <button class="btn btn-primary" @onclick="() => loadViewerToken()">Get Viewer</button>
+}
+<br />
+<div class="h2">ProjectId: @projectId</div>
+@if (models == null)
+{
+    <button class="btn btn-primary" @onclick="loadModels">Get list of models</button>
+}
+@if (models != null)
+{
+    <button class="btn btn-primary" @onclick="hideModels">Hide list of models</button>
+    <br />
+
+    <table>
+        <tr>
+            <th><button class="btn btn-success" @onclick="showAllModels">Show all models</button></th>
+            <th><button class="btn btn-danger" @onclick="hideAllModels">Hide all models</button></th>
+        </tr>
+        @foreach (var model in models)
+        {
+            <tr>
+                <td><button class="btn btn-success" @onclick="() => showModel(model.Id)">Show @model.Name</button></td>
+                <td><button class="btn btn-danger" @onclick="() => hideModel(model.Id)">Hide @model.Name</button></td>
+            </tr>
+        }
+    </table>
+}
+
+@code {
+
+    [Parameter]
+    public string projectId { get; set; }
+
+    public static string objectId = "placeholder";
+
+    [Parameter]
+    public List<ModelResponse>? models { get; set; }
+
+    public ViewerResponse viewerResponse { get; set; }
+
+    public EntityResponse currentSelectedObject { get; set; }
+    public IEnumerable<EntityResponse> selectedObjects { get; set; }
+
+    public string? token { get; set; }
+    public bool loaded = false;
+    public HttpClient httpClient;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ChangeParaContentActionAsync = LocalChangeParaContentValueAsync;
+        var client = _clientFactory.CreateClient();
+        if (bim.tokenResponse != null)
+        {
+            token = bim.tokenResponse.access_token;
+        }
+        loadViewerToken();
+    }
+
+
+
+    private async void loadModels()
+    {
+        try
+        {
+            models = await bim.GetModels(projectId);
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error: {e.Message} at stacktrace: {e.StackTrace}");
+            JSRuntime.InvokeVoidAsync("alert", $"Please login first");
+        }
+    }
+    private void hideModels()
+    {
+        models = null;
+    }
+
+    async Task load()
+    {
+        JSRuntime.InvokeVoidAsync("log", "Loading models from this url: " + viewerResponse.Url);
+        await JSRuntime.InvokeVoidAsync("createViewer", viewerResponse.Url);
+        loaded = true;
+    }
+
+    async Task showAllModels()
+    {
+        if (models != null)
+        {
+            List<Task> listOfTasks = new List<Task>();
+            foreach (var model in models)
+            {
+                @*listOfTasks.Add(JSRuntime.InvokeVoidAsync("showModel", model.Id));*@
+                await JSRuntime.InvokeVoidAsync("showModel", model.Id);
+            }
+            @*await Task.WhenAll(listOfTasks);*@
+        }
+    }
+    async Task hideAllModels()
+    {
+        if (models != null)
+        {
+            List<Task> listOfTasks = new List<Task>();
+            foreach (var model in models)
+            {
+                @*listOfTasks.Add(JSRuntime.InvokeVoidAsync("showModel", model.Id));*@
+                await JSRuntime.InvokeVoidAsync("hideModel", model.Id);
+            }
+            @*await Task.WhenAll(listOfTasks);*@
+        }
+    }
+    async Task showModel(string id)
+    {
+        await JSRuntime.InvokeVoidAsync("showModel", id);
+    }
+    async Task hideModel(string id)
+    {
+        await JSRuntime.InvokeVoidAsync("hideModel", id);
+    }
+    async Task entity()
+    {
+        if (currentSelectedObject != null)
+        {
+            await getEntity();
+            await JSRuntime.InvokeVoidAsync("createAlert", "ID: " + currentSelectedObject.ObjectId + "\nType: " + currentSelectedObject.IfcType + "\nName: " + currentSelectedObject.Attributes.Name.Value + "\nObjectType: " + currentSelectedObject.Attributes.ObjectType.Value);
+        }
+    }
+    async Task showAll()
+    {
+        await JSRuntime.InvokeVoidAsync("showAll");
+    }
+    async Task hideAll()
+    {
+        await JSRuntime.InvokeVoidAsync("hideAll");
+    }
+    async Task hideSelected()
+    {
+        if (currentSelectedObject != null)
+        {
+            foreach (var entity in selectedObjects)
+            {
+                await JSRuntime.InvokeVoidAsync("hideSelected", entity.ObjectId.ToString());
+            }
+        }
+    }
+    async Task makeTranslucent()
+    {
+        if (currentSelectedObject != null)
+        {
+            foreach (var entity in selectedObjects)
+            {
+                await JSRuntime.InvokeVoidAsync("translucent", entity.ObjectId.ToString());
+            }
+        }
+    }
+    async Task makeOpaque()
+    {
+        if (currentSelectedObject != null)
+        {
+            foreach (var entity in selectedObjects)
+            {
+                await JSRuntime.InvokeVoidAsync("opaque", entity.ObjectId.ToString());
+            }
+        }
+    }
+
+    private async void loadViewerToken(ModelResponse model = null)
+    {
+        try
+        {
+            if (model != null)
+            {
+                JSRuntime.InvokeVoidAsync("log", "Trying to make viewer token for model: " + model.Name);
+                viewerResponse = await bim.GetViewerToken(projectId, model);
+                JSRuntime.InvokeVoidAsync("log", "viewerResponse created: " + viewerResponse.Token);
+            }
+            else
+            {
+                JSRuntime.InvokeVoidAsync("log", "Trying to make viewer token for project: " + projectId);
+                viewerResponse = await bim.GetViewerToken(projectId, model);
+                JSRuntime.InvokeVoidAsync("log", "viewerResponse created: " + viewerResponse.Token);
+            }
+            //await load();
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error: {e.Message} at stacktrace: {e.StackTrace}");
+            JSRuntime.InvokeVoidAsync("alert", $"Error: {e.Message} at stacktrace: {e.StackTrace}");
+        }
+    }
+
+    [JSInvokable]
+    public static async Task ChangeParaContentValue(string value)
+    {
+        await ChangeParaContentActionAsync.Invoke(value);
+    }
+    private static Func<string, Task> ChangeParaContentActionAsync;
+
+    private async Task LocalChangeParaContentValueAsync(string value)
+    {
+        if (value == null || value == "")
+        {
+            currentSelectedObject = null;
+        }
+        else
+        {
+            objectId = value;
+            await getEntity();
+            StateHasChanged();
+        }
+    }
+
+    public async Task getEntity()
+    {
+
+        List<Task<EntityResponse>> listOfTasks = new List<Task<EntityResponse>>();
+        selectedObjects = new List<EntityResponse>();
+        if (projectId == null || objectId == null)
+        {
+            currentSelectedObject = null;
+        }
+        else
+        {
+            List<string> idList = new List<string>();
+            idList = objectId.Split(',').ToList();
+            foreach (var id in idList)
+            {
+                listOfTasks.Add(bim.GetObject(projectId, id));
+            }
+            selectedObjects = await Task.WhenAll<EntityResponse>(listOfTasks);
+            currentSelectedObject = selectedObjects.First();
+        }
+    }
+
+    public void giveAlert(string message)
+    {
+        JSRuntime.InvokeVoidAsync("createAlert", message);
+    }
+
+}

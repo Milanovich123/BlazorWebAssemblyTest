@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "FVW0gCQM7yqzeLPUAaxqCAOrO6bOR5d3QwDf2l0vrROX4AWgoEH0hcCpmv+dzHqQPLCBhc9BwHIomrskWW19qg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\m.mastbergen\\source\\repos\\test\\BlazorWebAssemblyTest\\BlazorProject\\Shared\\BlazorProject.Shared.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\m.mastbergen\\.nuget\\packages\\restsharp\\107.2.1\\restsharp.107.2.1.nupkg.sha512",
+    "C:\\Users\\m.mastbergen\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
+    "C:\\Users\\m.mastbergen\\.nuget\\packages\\system.text.json\\5.0.0\\system.text.json.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

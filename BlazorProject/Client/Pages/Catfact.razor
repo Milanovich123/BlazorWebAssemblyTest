@@ -1,0 +1,63 @@
+﻿@page "/cat"
+@using System.Text.Json
+@using System.Text.Json.Serialization;
+@using BlazorProject.Shared;
+@inject IHttpClientFactory ClientFactory
+
+<h1>Cat facts</h1>
+<br />
+@if (string.IsNullOrWhiteSpace(errorString) == false)
+{
+    <div class="h2">@errorString</div>
+}
+else if (cats == null)
+{
+    <div class="h4">Loading...</div>
+}
+else
+{
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <th>Breed</th>
+                <th>Coat</th>
+                <th>Country</th>
+                <th>Origin</th>
+                <th>Pattern</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cat in cats.data)
+            {
+                <tr>
+                    <td>@cat.breed</td>
+                    <td>@cat.coat</td>
+                    <td>@cat.country</td>
+                    <td>@cat.origin</td>
+                    <td>@cat.pattern</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    CatModel cats;
+    string errorString;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = ClientFactory.CreateClient();
+
+        try
+        {
+            cats = await client.GetFromJsonAsync<CatModel>("https://catfact.ninja/breeds");
+            errorString = null;
+        }
+        catch (Exception e)
+        {
+            errorString = e.Message;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\bin\Debug\net5.0\BlazorProject.Shared.deps.json
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\bin\Debug\net5.0\BlazorProject.Shared.dll
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\bin\Debug\net5.0\ref\BlazorProject.Shared.dll
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\bin\Debug\net5.0\BlazorProject.Shared.pdb
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.AssemblyInfoInputs.cache
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.AssemblyInfo.cs
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.csproj.CoreCompileInputs.cache
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.dll
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\ref\BlazorProject.Shared.dll
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.pdb
+C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.csproj.AssemblyReference.cache

@@ -1,0 +1,24 @@
+﻿@page "/"
+@using BlazorProject.Shared
+@inject HttpClient Http
+@inject AppState AppState
+@implements IDisposable
+
+<h1>Home</h1>
+
+<p>BimSync 3D viewer by Milan Mastbergen.</p>
+
+
+@AppState.Message
+@code {
+
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+}

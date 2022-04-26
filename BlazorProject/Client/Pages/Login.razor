@@ -1,0 +1,152 @@
+﻿@page "/login"
+@using BlazorProject.Shared;
+@using BlazorProject.Shared.ResponseClasses;
+@using System.Security.Cryptography;
+@inject NavigationManager NavigationManager
+@inject BimsyncService bim;
+@inject AppState AppState
+@inject IJSRuntime JSRuntime
+@if (projects == null)
+{
+    <h1>Connect to BimSync to proceed</h1>
+    <br />
+}
+else
+{
+    @if (user != null)
+    {
+        <h1>Hello @user.Name</h1> <button class="btn btn-primary" @onclick="logout">Log out</button>
+        <br />
+    }
+}
+@if (projects != null)
+{
+    <h3>
+        Projects:
+    </h3>
+}
+<ul>
+    @if (projects == null)
+    {
+    }
+    else
+    {
+        @foreach (var project in projects)
+        {
+            <li style=" font-size:24px"> @project.Name </li>
+            <button class="btn btn-primary" @onclick="() => goToViewer(project.Id)">View project</button>
+            <br />
+        }
+    }
+</ul>
+
+@if (!LoggedIn)
+{
+    <button class="btn btn-primary" @onclick="login">Log In</button>
+    <br />
+
+    @*<button class="btn btn-primary" @onclick="getProjects">Get Projects</button>
+        <br />*@
+}
+
+@code {
+    @*private BimsyncService bim;*@
+private string clientVerifier;
+[Parameter]
+public List<ProjectResponse>? projects { get; set; }
+[Parameter]
+public List<ModelResponse>? models { get; set; }
+
+public List<Project> projectslist { get; set; }
+public UserResponse user { get; set; }
+
+bool LoggedIn = false;
+
+[Parameter]
+public string? auth_code { get; set; }
+public string name { get; set; }
+
+public string CID_Dashboard { get; set; }
+public string CID_Dev { get; set; }
+public string CID_Prod { get; set; }
+public string redirect_uri { get; set; }
+protected override void OnInitialized()
+{
+    checkLoggedIn();
+    CID_Dashboard = "SCAYfU2ZW0bmtfo";
+    CID_Dev = "uSta6pVCW8WHNKc";
+    CID_Prod = "XZ1XPFkDwanUoae";
+    redirect_uri = NavigationManager.BaseUri + "login";
+    clientVerifier = GenerateVerifier();
+    if (LoggedIn)
+    {
+        getProjects();
+    }
+    base.OnInitialized();
+}
+
+public void login() { NavigationManager.NavigateTo($"https://api.bimsync.com/oauth2/authorize?client_id={CID_Dev}&response_type=code&redirect_uri={NavigationManager.BaseUri}login"); }
+public void logout() {
+    projects = null;
+    user = null;
+    LoggedIn = false;
+    AppState.LoggedIn = false;
+    NavigationManager.NavigateTo("/login");
+}
+
+
+public void checkLoggedIn()
+{
+    if (AppState.LoggedIn)
+    {
+        LoggedIn = true;
+    } else
+    {
+        string uri = NavigationManager.Uri;
+        string sub = uri.Substring(uri.IndexOf('=') + 1);
+        if (sub.Length == 10)//thiscouldbebad(checking if code is of length 10 to check if logged in..)
+        {
+            AppState.LoggedIn = true;
+            LoggedIn = true;
+        }
+    }
+}
+public async void getProjects()
+{
+    string uri = NavigationManager.Uri;
+    string sub = uri.Substring(uri.IndexOf('=') + 1);
+    auth_code = sub;
+    try
+    {
+        string token = await bim.GetTokens(auth_code, clientVerifier, redirect_uri);
+        user = await bim.GetUser();
+        AppState.UpdateUser(user);
+
+        projects = await bim.GetProjects();
+        StateHasChanged();
+    }
+    catch (Exception e)
+    {
+        JSRuntime.InvokeVoidAsync("alert", $"Error: {e.Message} at stacktrace: {e.StackTrace}");
+    }
+
+}
+private void goToViewer(string projectId)
+{
+    NavigationManager.NavigateTo(NavigationManager.BaseUri + "viewer/" + projectId);
+}
+private string GenerateVerifier()
+{
+    var rng = RandomNumberGenerator.Create();
+
+    var bytes = new byte[120];
+    rng.GetBytes(bytes);
+
+    var code_verifier = Convert.ToBase64String(bytes)
+        .TrimEnd('=')
+        .Replace('+', '-')
+        .Replace('/', '_');
+
+    return code_verifier;
+}
+}

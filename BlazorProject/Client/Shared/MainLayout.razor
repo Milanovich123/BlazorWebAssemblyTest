@@ -1,0 +1,62 @@
+﻿@using BlazorProject.Shared;
+@inherits LayoutComponentBase
+@inject AppState AppState
+@inject NavigationManager NavigationManager
+@implements IDisposable
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <div class="main">
+        <div class="top-row px-4">
+            @*@if (AppState.Enabled)
+                {
+                    <button class="btn btn-success" @onclick="UpdateEnabledButtonClicked">Enabled</button>
+                }
+                else
+                {
+                    <button class="btn btn-danger" @onclick="UpdateEnabledButtonClicked">Disabled</button>
+                }*@
+            <p>@AppState.Message &emsp;</p>
+            @if (AppState.LoggedIn && AppState.user != null)
+            {
+                <p>Hello @AppState.user.Name &emsp;</p>
+                <button class="btn btn-danger" @onclick="Logout">Log Out</button>
+            }
+            <a href="https://bimsync.com/developers/reference/api/v2" target="_blank" class="ml-md-auto">BimSync Api</a>
+        </div>
+
+        <div class="content px-4">
+            @Body
+        </div>
+    </div>
+</div>
+@code {
+    protected override void OnInitialized()
+    {
+        AppState.OnChange += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        AppState.OnChange -= StateHasChanged;
+    }
+    void UpdateEnabledButtonClicked()
+    {
+        if (AppState.Enabled)
+        {
+            AppState.UpdateEnabled(false);
+        }
+        else
+        {
+            AppState.UpdateEnabled(true);
+        }
+    }
+    void Logout()
+    {
+        AppState.LoggedIn = false;
+        AppState.UpdateUser(null);
+        NavigationManager.NavigateTo("/");
+    }
+}
