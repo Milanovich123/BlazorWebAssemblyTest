@@ -1,0 +1,48 @@
+Documentatie:
+
+Project
+	Gekozen is voor blazor web assembly, hiermee maak je eenvoudig websites in c# zonder alteveel javascript.
+	Er zijn drie projecten in de solution: BlazorProject.Client, BlazorProject.Server en BlazorProject.Shared.
+	In Client zit de functionaliteit, in shared zit de modelinformatie en referentieclasses, server is nauwelijks gebruikt.
+	
+Client
+	In de map wwwroot zit de css, html en javascript files. 
+	In de map Pages worden de pagina's gemaakt (negeer Catfact, dit is een test api pagina)
+	De pagina's zijn razor files, wat het gemakkelijk maakt om met c# code functionaliteit te geven aan div elementjes.
+	
+	In de map Shared staat de Mainlayour, NavMenu en BimsyncService
+	De Mainlayout van de website bevat de body(een van de razorpagina's), een top row en een navigatiemenu.
+	De NavMenu bestaat uit NavLinks die verwijzen naar andere razorpagina's
+	De BimsyncService is de klasse die met de BimSync Api praat. 
+	In Program.cs worden BimsyncService en AppState scoped toegevoegd zodat alle pagina's toegang hebben. (via inject)
+Shared 
+	In de map ResponseClasses wordt een Json bestand omgezet naar een model met properties.
+	AppState is een classe die over het gehele project beschikbaar is, hier wordt onder andere de ingelogde user opgeslagen.
+
+
+
+Werking:
+Login.razor:
+	User logt in bij BimSync:
+		Er wordt genavigeerd naar: 
+		https://api.bimsync.com/oauth2/authorize?client_id={CID_Dev}&response_type=code&redirect_uri={NavigationManager.BaseUri}login
+		de parameter CID_Dev is de client id van de app (uSta6pVCW8WHNKc)	deze code en redirect_uri staan op Robbert Ploegmaker's bimsync account
+	Na een succesvolle login bij bimsync wordt naar de redirect_uri een code gestuurd: https://localhost:44305/login?code=R96mnqmj5k
+	Bij terugkomst op de redirect_uri wordt gekeken wat de code is en daarmee worden de projecten opgehaald: getProjects()
+	Eerst wordt een Token opgevraagd: https://api.bimsync.com/oauth2/token
+		BimsyncService maakt een Post request met onder andere de code als request parameter en krijgt een Json terug.
+		Het Json wordt geconverteerd naar een TokenResponse die de access_token bevat die nodig is om projecten op te vragen.
+	Dan worden projecten geladen: https://api.bimsync.com/v2/projects
+		De lijst aan projecten worden van Json naar ProjectResponses geconverteerd
+	Er kan nu op een project geklikt worden, het project_id wordt doorgegeven aan de viewer pagina om modellen op te halen
+Viewer.razor:
+	De viewerpagina heeft als parameter de project_id.
+	Hiermee wordt een Viewer3D token aangemaakt, zie deze link: https://bimsync.com/developers/reference/api/v2#create-viewer3d-token
+	BimsyncService roept de methode GetViewerToken(string projectId) aan en geeft een viewerResponse terug, deze bevat token + url + revisions
+	Met deze url en de bimsync.js javascript die in de index.html wordt aangeroepen kan de viewer data ophalen.
+	De javascript functie createViewer(url) wordt aangeroepen met de knop 'Load all objects from project'.
+	Meer uitleg over hoe dit werkt staat hier: https://bimsync.com/developers/reference/viewer-3d#release-channels
+	Vervolgens wordt dezelfde bimsync.js gebruikt om de modellen te bekijken, aan/uit te zetten etc.
+	
+	
+	
