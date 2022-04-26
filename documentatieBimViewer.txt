@@ -44,5 +44,21 @@ Viewer.razor:
 	Meer uitleg over hoe dit werkt staat hier: https://bimsync.com/developers/reference/viewer-3d#release-channels
 	Vervolgens wordt dezelfde bimsync.js gebruikt om de modellen te bekijken, aan/uit te zetten etc.
 	
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+
 	
+Ifc objects: 
+
+Hoe kunnen alle ifc objects in een model worden opgehaald? 
+
+Bimsync api geeft de mogelijkheid om alle 'producten' van een project, model of revisie op te halen. Deze kunnen ook met een 'Query' gefiltered worden. Zie ook:  
+
+https://bimsync.com/developers/reference/api/v2#list-products 
+
+https://bimsync.com/developers/reference/api/v2#product 
+
+https://bimsync.com/developers/reference/api/v2#query 
 	
