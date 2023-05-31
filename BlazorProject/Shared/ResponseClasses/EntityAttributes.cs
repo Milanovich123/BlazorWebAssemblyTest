@@ -10,19 +10,19 @@ namespace BlazorProject.Shared.ResponseClasses
     public class EntityAttributes
     {
         [JsonPropertyName("GlobalId")]
-        public ObjectTypeClass GlobalId { get; set; }
+        public EntityAttributeValues GlobalId { get; set; }
 
         [JsonPropertyName("Name")]
-        public ObjectTypeClass Name { get; set; }
+        public EntityAttributeValues Name { get; set; }
 
         [JsonPropertyName("ObjectType")]
-        public ObjectTypeClass ObjectType { get; set; }
+        public EntityAttributeValues ObjectType { get; set; }
 
         [JsonPropertyName("Tag")]
-        public ObjectTypeClass Tag { get; set; }
+        public EntityAttributeValues Tag { get; set; }
     }
 
-    public partial class ObjectTypeClass
+    public partial class EntityAttributeValues
     {
         [JsonPropertyName("ifcType")]
         public string IfcType { get; set; }

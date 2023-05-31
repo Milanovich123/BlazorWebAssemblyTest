@@ -12,7 +12,7 @@
 <div>
     @if (currentSelectedObject != null)
     {
-        <span>@currentSelectedObject.Attributes.Name.Value - @currentSelectedObject.IfcType</span>
+        <span>@currentSelectedObject.Attributes["Name"].Value - @currentSelectedObject.IfcType</span>
     }
     else
     {
@@ -172,7 +172,7 @@ else
         if (currentSelectedObject != null)
         {
             await getEntity();
-            await JSRuntime.InvokeVoidAsync("createAlert", "ID: " + currentSelectedObject.ObjectId + "\nType: " + currentSelectedObject.IfcType + "\nName: " + currentSelectedObject.Attributes.Name.Value + "\nObjectType: " + currentSelectedObject.Attributes.ObjectType.Value);
+            await JSRuntime.InvokeVoidAsync("createAlert", "ID: " + currentSelectedObject.ObjectId + "\nType: " + currentSelectedObject.IfcType + "\nName: " + currentSelectedObject.Attributes["Name"].Value + "\nObjectType: " + currentSelectedObject.Attributes["ObjectType"].Value);
         }
     }
     async Task showAll()

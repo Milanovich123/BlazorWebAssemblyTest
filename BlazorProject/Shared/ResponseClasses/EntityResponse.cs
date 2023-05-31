@@ -13,7 +13,8 @@ namespace BlazorProject.Shared.ResponseClasses
         public string RevisionId { get; set; }
 
         [JsonPropertyName("attributes")]
-        public EntityAttributes Attributes { get; set; }
+        public Dictionary<string, IfcAttributeValue> Attributes { get; set; }
+        //public EntityAttributes Attributes { get; set; }
 
         [JsonPropertyName("ifcType")]
         public string IfcType { get; set; }
@@ -32,5 +33,16 @@ namespace BlazorProject.Shared.ResponseClasses
 
         //[JsonPropertyName("type")]
         //public object Type { get; set; }
+    }
+    public class IfcAttributeValue
+    {
+        [JsonPropertyName("ifcType")]
+        public string IfcType { get; set; }
+
+        [JsonPropertyName("type")]
+        public string Type { get; set; }
+
+        [JsonPropertyName("value")]
+        public string Value { get; set; }
     }
 }

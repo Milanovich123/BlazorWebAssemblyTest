@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "e5o6E3r340KKcvYxqVKWLSAI0F1reKHiXXg3hQKMdRL7Bvew/SUFP3AmtxjKqUzWVliF8cbT8OvSPXYXyZD3ew==",
+  "dgSpecHash": "Ryy1u1Id3cR/BktrwzbcHK9s+r5GBXymBLnyYNCSDzgYSs/EPfYM0RqlEp6mqfpaaVwmdZYgbQybj6wUUCCQlA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\m.mastbergen\\source\\repos\\test\\BlazorWebAssemblyTest\\BlazorProject\\Client\\BlazorProject.Client.csproj",
+  "projectFilePath": "\\\\FS01\\USERS$\\m.mastbergen\\Documents\\GitHub\\BlazorWebAssemblyTest\\BlazorProject\\Client\\BlazorProject.Client.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\m.mastbergen\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.9\\microsoft.aspnetcore.authorization.5.0.9.nupkg.sha512",
     "C:\\Users\\m.mastbergen\\.nuget\\packages\\microsoft.aspnetcore.components\\5.0.9\\microsoft.aspnetcore.components.5.0.9.nupkg.sha512",
@@ -59,7 +59,7 @@
     "C:\\Users\\m.mastbergen\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\m.mastbergen\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\m.mastbergen\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
-    "C:\\Users\\m.mastbergen\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.15\\microsoft.netcore.app.runtime.browser-wasm.5.0.15.nupkg.sha512"
+    "C:\\Users\\m.mastbergen\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.17\\microsoft.netcore.app.runtime.browser-wasm.5.0.17.nupkg.sha512"
   ],
   "logs": []
 }

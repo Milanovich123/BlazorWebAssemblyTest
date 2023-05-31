@@ -10,3 +10,15 @@ C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shar
 C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\ref\BlazorProject.Shared.dll
 C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.pdb
 C:\Users\m.mastbergen\source\repos\test\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.csproj.AssemblyReference.cache
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\bin\Debug\net5.0\BlazorProject.Shared.deps.json
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\bin\Debug\net5.0\BlazorProject.Shared.dll
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\bin\Debug\net5.0\BlazorProject.Shared.pdb
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.csproj.AssemblyReference.cache
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.GeneratedMSBuildEditorConfig.editorconfig
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.AssemblyInfoInputs.cache
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.AssemblyInfo.cs
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.csproj.CoreCompileInputs.cache
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.dll
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\ref\BlazorProject.Shared.dll
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\BlazorProject.Shared.pdb
+\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Shared\obj\Debug\net5.0\refint\BlazorProject.Shared.dll

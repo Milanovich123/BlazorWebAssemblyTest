@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PvHGQf3wIJMVablW31nhrbQ88nOhlV4V1EkaSJMDMzTaAJ+vSXuwQJTrr7rcffoZGiPfbIvnenWk1P1kmzVG3g==",
+  "dgSpecHash": "lVfI+Uy00z3GWE3YlIDTHDuwG5DT3YwGX0RlSmaRyp2kojUAjcOPcgVC8LT/OFHDld2XrRi1paeD07FkM7V5Kw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\m.mastbergen\\source\\repos\\test\\BlazorWebAssemblyTest\\BlazorProject\\Server\\BlazorProject.Server.csproj",
+  "projectFilePath": "\\\\FS01\\USERS$\\m.mastbergen\\Documents\\GitHub\\BlazorWebAssemblyTest\\BlazorProject\\Server\\BlazorProject.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\m.mastbergen\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\m.mastbergen\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.9\\microsoft.aspnetcore.authorization.5.0.9.nupkg.sha512",
