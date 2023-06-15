@@ -233,7 +233,7 @@
       "url": "_content\/Syncfusion.Blazor.Grid\/scripts\/sf-grid-d2f564.min.js"
     },
     {
-      "hash": "sha256-T0km+39qObASeN97miCoBRw+CzT8Ik92ba4yL0wWW9s=",
+      "hash": "sha256-3ee5GJmedhw7WiwU6EjGYStI1My98ETIpdckklIGnqU=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -1101,11 +1101,11 @@
       "url": "_framework\/BlazorProject.Shared.pdb"
     },
     {
-      "hash": "sha256-CZgaJ2BbmtdoTFDVB9wjl48kUTt8YrckphZ7MSIUkv0=",
+      "hash": "sha256-ggJZY3bJz0XSXxjqKLs4Vzmea7kRxeIoo1Q6D11qYYQ=",
       "url": "_framework\/BlazorProject.Client.dll"
     },
     {
-      "hash": "sha256-5ct174M\/qWjyr0vG3OoiMU+TfQmBe801rVKWOQKW6xs=",
+      "hash": "sha256-RHqaN\/yXYKf4n4h8ChrnMw3yLbVntB8hl7WoUx63Wa0=",
       "url": "_framework\/BlazorProject.Client.pdb"
     },
     {
@@ -1973,7 +1973,7 @@
       "url": "_framework\/BlazorProject.Shared.dll.gz"
     },
     {
-      "hash": "sha256-SHJbuL4QjIaGv92P4aA6KPCwoaGSxcMlp\/16nXsYzd4=",
+      "hash": "sha256-r7OT3Cxvz0605B\/noSL9d8GutB5FIIgWMgoNlyw4o+4=",
       "url": "bimsync.js"
     },
     {
@@ -2045,5 +2045,5 @@
       "url": "BlazorProject.Client.bundle.scp.css"
     }
   ],
-  "version": "LtFoisAM"
+  "version": "+QZe3c\/g"
 };

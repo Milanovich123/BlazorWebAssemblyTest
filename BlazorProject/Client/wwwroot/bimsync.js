@@ -18,8 +18,6 @@ function createViewer(url) {
         if (!isButtonGroupHovered) {
             console.log("Selected objects: " + selected.toString());
             DotNet.invokeMethodAsync('BlazorProject.Client', "ChangeParaContentValue", selected.toString());
-        } else {
-            console.log("Hovering over group button so we don't interact with the viewer.");
         }
     });
 }
@@ -30,31 +28,42 @@ function hideModel(id) {
     $('#viewer-container').viewer('hideModel', id);
 }
 
-function showSelected(id) {
-    $('#viewer-container').viewer('show', id);
-    console.log(typeof(id));
+function showSelected(...ids) {
+    ids.forEach(id => {
+        $('#viewer-container').viewer('show', id);
+    });
 }
 function showAll() {
     $('#viewer-container').viewer('showAll');
     console.log("Showing all");
 }
-function hideOther(id) {
+function hideOther(...ids) {
     $('#viewer-container').viewer('hideAll');
-    $('#viewer-container').viewer('show', id);
-    console.log("Hiding all except: " + id);
+    if (ids.length === 1 && ids[0] === "") {
+    } else {
+        ids.forEach(id => {
+            $('#viewer-container').viewer('show', id);
+        });
+    }
 }
-function hideSelected(id) {
-    $('#viewer-container').viewer('hide', id);
-    console.log("Hiding object with id: " + id);
+function hideSelected(...ids) {
+    ids.forEach(id => {
+        $('#viewer-container').viewer('hide', id);
+    });
 }
-function translucent(id) {
-    $('#viewer-container').viewer('translucent', id);
-    console.log("Translucant on object with id: " + id);
+function translucent(...ids) {
+    ids.forEach(id => {
+        $('#viewer-container').viewer('translucent', id);
+    });
 }
-function translucentAll(id) {
+function translucentAll(...ids) {
     $('#viewer-container').viewer('translucentAll');
-    $('#viewer-container').viewer('show', id);
-    console.log("Make all translucent except: " + id);
+    if (ids.length === 1 && ids[0] === "") {
+    } else {
+        ids.forEach(id => {
+            $('#viewer-container').viewer('show', id);
+        });
+    }
 }
 
 function modelInfo() {
@@ -67,11 +76,9 @@ function checkButtonGroupHover() {
     if (buttonGroup) {
         buttonGroup.addEventListener('mouseenter', () => {
             isButtonGroupHovered = true;
-            console.log("Hovering over button group.");
         });
         buttonGroup.addEventListener('mouseleave', () => {
             isButtonGroupHovered = false;
-            console.log("Stopped hovering over button group.");
         });
     } else {
         console.log("buttonGroup was not found.");
