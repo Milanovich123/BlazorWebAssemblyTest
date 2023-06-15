@@ -25,25 +25,26 @@
 
     @if (!loaded)
     {
-        <div class="btn-group" role="group">
-            <button class="btn btn-primary" @onclick="load">Load all objects from project</button>
-            @*<button class="btn btn-primary" @onclick="entity">Information</button>*@
-        </div>
+        <button class="btn btn-primary" @onclick="load">Load all objects from project</button>
     }
     else
     {
         <button title="Show all" class="btn btn-secondary" @onclick="showAll">Show all</button>
-        <button title="Hide all" class="btn btn-secondary" @onclick="hideAll">Hide all</button>
-        <div class="btn-group" role="group">
-            <button title="Show selected" class="buttoneye" @onclick="makeOpaque"></button>
-            <button title="Translucent selected" class="buttoneye" id="eye2" @onclick="makeTranslucent"></button>
-            <button title="Hide selected" class="buttoneye" id="eye3" @onclick="hideSelected"></button>
-        </div>
+        <button title="Hide all" class="btn btn-secondary" @onclick="hideOther">Hide all</button>
     }
 
 
     <div id="viewer-container">
+        <div class="btn-group" role="group">
+            <button title="Toon alles" class="buttoneye" @onclick="showAll"></button>
+            <button title="Toon geselecteerde" class="dropbtn" @onclick="showSelected"></button>
 
+            <button title="Maak transparant" class="buttoneye" id="eye2" @onclick="makeTranslucent"></button>
+            <button title="Maak anderen transparant" class="dropbtn" @onclick="translucentAll"></button>
+
+            <button title="Verberg geselecteerde" class="buttoneye" id="eye3" @onclick="hideSelected"></button>
+            <button title="Verberg anderen" class="dropbtn" @onclick="hideOther"></button>
+        </div>
     </div>
 }
 else
@@ -179,17 +180,36 @@ else
     {
         await JSRuntime.InvokeVoidAsync("showAll");
     }
-    async Task hideAll()
+    async Task translucentAll()
     {
-        await JSRuntime.InvokeVoidAsync("hideAll");
+        if (currentSelectedObject != null)
+        {
+            if (currentSelectedObject != null)
+            {
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("translucentAll", idArray);
+            }
+        }
+    }
+    async Task hideOther()
+    {
+        if (currentSelectedObject != null)
+        {
+            if (currentSelectedObject != null)
+            {
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("hideOther", idArray);
+            }
+        }
     }
     async Task hideSelected()
     {
         if (currentSelectedObject != null)
         {
-            foreach (var entity in selectedObjects)
+            if (currentSelectedObject != null)
             {
-                await JSRuntime.InvokeVoidAsync("hideSelected", entity.ObjectId.ToString());
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("hideSelected", idArray);
             }
         }
     }
@@ -197,19 +217,21 @@ else
     {
         if (currentSelectedObject != null)
         {
-            foreach (var entity in selectedObjects)
+            if (currentSelectedObject != null)
             {
-                await JSRuntime.InvokeVoidAsync("translucent", entity.ObjectId.ToString());
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("translucent", idArray);
             }
         }
     }
-    async Task makeOpaque()
+    async Task showSelected()
     {
         if (currentSelectedObject != null)
         {
-            foreach (var entity in selectedObjects)
+            if (currentSelectedObject != null)
             {
-                await JSRuntime.InvokeVoidAsync("opaque", entity.ObjectId.ToString());
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("showSelected", idArray);
             }
         }
     }

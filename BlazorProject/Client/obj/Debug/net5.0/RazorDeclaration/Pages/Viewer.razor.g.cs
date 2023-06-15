@@ -126,7 +126,7 @@ using System.Security.Cryptography;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 79 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 80 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
        
 
     [Parameter]
@@ -197,7 +197,7 @@ using System.Security.Cryptography;
 #line hidden
 #nullable disable
 #nullable restore
-#line 143 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 144 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
                                                                                       
                 await JSRuntime.InvokeVoidAsync("showModel", model.Id);
             }
@@ -207,7 +207,7 @@ using System.Security.Cryptography;
 #line hidden
 #nullable disable
 #nullable restore
-#line 146 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 147 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
                                                 
         }
     }
@@ -224,7 +224,7 @@ using System.Security.Cryptography;
 #line hidden
 #nullable disable
 #nullable restore
-#line 156 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 157 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
                                                                                       
                 await JSRuntime.InvokeVoidAsync("hideModel", model.Id);
             }
@@ -234,7 +234,7 @@ using System.Security.Cryptography;
 #line hidden
 #nullable disable
 #nullable restore
-#line 159 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 160 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
                                                 
         }
     }
@@ -258,17 +258,36 @@ using System.Security.Cryptography;
     {
         await JSRuntime.InvokeVoidAsync("showAll");
     }
-    async Task hideAll()
+    async Task translucentAll()
     {
-        await JSRuntime.InvokeVoidAsync("hideAll");
+        if (currentSelectedObject != null)
+        {
+            if (currentSelectedObject != null)
+            {
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("translucentAll", idArray);
+            }
+        }
+    }
+    async Task hideOther()
+    {
+        if (currentSelectedObject != null)
+        {
+            if (currentSelectedObject != null)
+            {
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("hideOther", idArray);
+            }
+        }
     }
     async Task hideSelected()
     {
         if (currentSelectedObject != null)
         {
-            foreach (var entity in selectedObjects)
+            if (currentSelectedObject != null)
             {
-                await JSRuntime.InvokeVoidAsync("hideSelected", entity.ObjectId.ToString());
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("hideSelected", idArray);
             }
         }
     }
@@ -276,19 +295,21 @@ using System.Security.Cryptography;
     {
         if (currentSelectedObject != null)
         {
-            foreach (var entity in selectedObjects)
+            if (currentSelectedObject != null)
             {
-                await JSRuntime.InvokeVoidAsync("translucent", entity.ObjectId.ToString());
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("translucent", idArray);
             }
         }
     }
-    async Task makeOpaque()
+    async Task showSelected()
     {
         if (currentSelectedObject != null)
         {
-            foreach (var entity in selectedObjects)
+            if (currentSelectedObject != null)
             {
-                await JSRuntime.InvokeVoidAsync("opaque", entity.ObjectId.ToString());
+                var idArray = selectedObjects.Select(entity => entity.ObjectId.ToString()).ToArray();
+                await JSRuntime.InvokeVoidAsync("showSelected", idArray);
             }
         }
     }
