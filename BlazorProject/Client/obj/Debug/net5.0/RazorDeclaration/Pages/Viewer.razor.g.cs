@@ -126,7 +126,7 @@ using System.Security.Cryptography;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 80 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 70 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
        
 
     [Parameter]
@@ -157,13 +157,31 @@ using System.Security.Cryptography;
         loadViewerToken();
     }
 
+    async Task HandleCheckboxChange(ModelResponse model)
+    {
 
+        // Perform desired actions when the checkbox is checked/unchecked
+        if (model.IsChecked)
+        {
+            model.IsChecked = false;
+            await JSRuntime.InvokeVoidAsync("hideModel", model.Id);
+        }
+        else
+        {
+            model.IsChecked = true;
+            await JSRuntime.InvokeVoidAsync("showModel", model.Id);
+        }
+    }
 
     private async void loadModels()
     {
         try
         {
             models = await bim.GetModels(projectId);
+            foreach (var model in models)
+            {
+                model.IsChecked = true;
+            }
             StateHasChanged();
         }
         catch (Exception e)
@@ -184,6 +202,11 @@ using System.Security.Cryptography;
         loaded = true;
     }
 
+    async Task toggleDropdown()
+    {
+        await JSRuntime.InvokeVoidAsync("toggleDropdown");
+    }
+
     async Task showAllModels()
     {
         if (models != null)
@@ -197,7 +220,7 @@ using System.Security.Cryptography;
 #line hidden
 #nullable disable
 #nullable restore
-#line 144 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 157 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
                                                                                       
                 await JSRuntime.InvokeVoidAsync("showModel", model.Id);
             }
@@ -207,7 +230,7 @@ using System.Security.Cryptography;
 #line hidden
 #nullable disable
 #nullable restore
-#line 147 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 160 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
                                                 
         }
     }
@@ -224,7 +247,7 @@ using System.Security.Cryptography;
 #line hidden
 #nullable disable
 #nullable restore
-#line 157 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 170 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
                                                                                       
                 await JSRuntime.InvokeVoidAsync("hideModel", model.Id);
             }
@@ -234,7 +257,7 @@ using System.Security.Cryptography;
 #line hidden
 #nullable disable
 #nullable restore
-#line 160 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
+#line 173 "\\FS01\USERS$\m.mastbergen\Documents\GitHub\BlazorWebAssemblyTest\BlazorProject\Client\Pages\Viewer.razor"
                                                 
         }
     }

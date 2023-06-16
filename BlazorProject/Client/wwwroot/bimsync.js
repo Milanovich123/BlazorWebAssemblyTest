@@ -84,3 +84,20 @@ function checkButtonGroupHover() {
         console.log("buttonGroup was not found.");
     }
 }
+
+function toggleDropdown() {
+    var dropdownContent = document.getElementById("dropdown-content");
+    dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+}
+
+window.onclick = function (event) {
+    if (!event.target.matches('.buttoncube') && !event.target.matches('.dropdown-content') && !event.target.closest('.dropdown-content')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.style.display === "block") {
+                openDropdown.style.display = "none";
+            }
+        }
+    }
+}
