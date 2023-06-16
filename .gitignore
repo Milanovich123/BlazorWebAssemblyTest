@@ -1,0 +1,4 @@
+
+*.vsidx
+*.cache
+.vs/BlazorWebAssemblyTest/v17/.suo
