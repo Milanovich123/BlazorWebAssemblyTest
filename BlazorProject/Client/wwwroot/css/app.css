@@ -50,10 +50,8 @@ a, .btn-link {
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    max-height: 400px; /* Adjust the height as needed before scrollbar pops up*/
+    right: calc(75%); /* Adjust this value to shift the model list to the right or left */
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -78,14 +76,18 @@ a, .btn-link {
 }
 
 .buttoncube {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHkSURBVFiF7dcvbBRBFAbwX0kLCQ2CprSChKAIgiCaIJogKyqwldizJDVYUoXFkGCRWIIiiAqCAEUQUIUoBlIqmvKnBBaxb7N707tjd7qA6ZdMcjf35n3fzHuT+4Z8rOJ1jNUj5OmMS3iEIhlPceVvEp/FXXwPwi2sYQVvYu4HHuBcn8TTGOBjkOziNk41YmYi5lPEfI6Yk0clX1HWuMBPPMTChPg53FOeRIF3uJFDnNb5Ga52WH8ZT2T0x7g656JTfwywo67zuh5qGDnWI2cRHIM0aFF9XHtY6oE4xVLkrniGeumC4Tv9RVmKMz0Qn1beiCZ5EZyHBLzERggosI2bmMognoq12+pNbQTHWAGb8f288sr9ivlXuN6B/Bqeq3f7GBfjt802AtokGoU2wjsJoDzKNbw3vj/SOn9QdvqJEfk6C6gwq6zhvuH+aNZ5P2JmJ+TJFlAhPea25elNQIVlfIux3GHdkIDpDgtTvMDXxucsjGqSf4pjAccCKiyoTcN9zLdctxujDeYjd2XXDlm7HEPSRkArQ1KhqyX7k4Bsy97WlI4TkG1KU4yy5YsTBKS2/K1MW95E+jDZwx3lw6QSMINb6jr39jBpotrdgbo/qj+jrZg7iJi5PolT/LfHaYpenue/AbTU1c+6nGuRAAAAAElFTkSuQmCC');    background-repeat: no-repeat; background-color: #f1f1f1;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAHkSURBVFiF7dcvbBRBFAbwX0kLCQ2CprSChKAIgiCaIJogKyqwldizJDVYUoXFkGCRWIIiiAqCAEUQUIUoBlIqmvKnBBaxb7N707tjd7qA6ZdMcjf35n3fzHuT+4Z8rOJ1jNUj5OmMS3iEIhlPceVvEp/FXXwPwi2sYQVvYu4HHuBcn8TTGOBjkOziNk41YmYi5lPEfI6Yk0clX1HWuMBPPMTChPg53FOeRIF3uJFDnNb5Ga52WH8ZT2T0x7g656JTfwywo67zuh5qGDnWI2cRHIM0aFF9XHtY6oE4xVLkrniGeumC4Tv9RVmKMz0Qn1beiCZ5EZyHBLzERggosI2bmMognoq12+pNbQTHWAGb8f288sr9ivlXuN6B/Bqeq3f7GBfjt802AtokGoU2wjsJoDzKNbw3vj/SOn9QdvqJEfk6C6gwq6zhvuH+aNZ5P2JmJ+TJFlAhPea25elNQIVlfIux3GHdkIDpDgtTvMDXxucsjGqSf4pjAccCKiyoTcN9zLdctxujDeYjd2XXDlm7HEPSRkArQ1KhqyX7k4Bsy97WlI4TkG1KU4yy5YsTBKS2/K1MW95E+jDZwx3lw6QSMINb6jr39jBpotrdgbo/qj+jrZg7iJi5PolT/LfHaYpenue/AbTU1c+6nGuRAAAAAElFTkSuQmCC');
+    background-repeat: no-repeat;
+    background-color: #f1f1f1;
     background-position: center center;
+    position: absolute;
     padding: 10px 16px;
     margin: 0px;
     cursor: pointer;
     width: 40px;
     height: 40px;
     border: 1px solid #333;
+    right: calc(430%); /* Adjust this value to position the Models button more to the right or left*/
 }
 
 .buttoneye {
